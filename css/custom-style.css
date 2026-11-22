@@ -128,47 +128,148 @@ h2 {
   height: 25px;
 }
 
-/* News styles  */
+/* SINGLE NEWS */
 
 .blog-post {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   width: 100%;
-  background: rgba(0, 0, 0, 0.05);
-  padding-top: 20px;
-}
-
-.blog-content {
-  width: 100%;
-}
-
-.blog-content p {
-  color: gray;
+  min-height: 100vh;
+  padding: 60px 20px 100px;
+  background: #f5f6f8;
 }
 
 .padding-for-post {
-  background: white;
-  padding: 20px;
-  width: 50%;
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+  background: #fff;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 8px 35px rgba(0, 0, 0, 0.04);
 }
+
+/* FEATURED IMAGE */
 
 .thumbnails {
   width: 100%;
-  height: 50vh;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-size: cover;
+  background: #e9e9e9;
 }
 
 .thumbnails img {
+  display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
 }
 
-/* News Styles */
+/* CONTENT */
+
+.blog-content {
+  padding: 48px 60px 65px;
+}
+.post-title {
+  font-size: clamp(30px, 4vw, 44px);
+  font-weight: 700;
+  line-height: 1.2;
+  color: #171717;
+  margin: 0 0 35px;
+  letter-spacing: -0.8px;
+}
+
+.post-body {
+  font-size: 17px;
+  line-height: 1.85;
+  color: #444;
+}
+
+.post-body p {
+  margin: 0 0 24px;
+}
+
+.post-body h2,
+.post-body h3 {
+  color: #171717;
+  line-height: 1.3;
+  margin: 35px 0 18px;
+}
+
+.post-body h2 {
+  font-size: 26px;
+}
+
+.post-body h3 {
+  font-size: 21px;
+}
+
+.post-body a {
+  color: #b22b2b;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.post-body ul,
+.post-body ol {
+  padding-left: 25px;
+  margin-bottom: 25px;
+}
+
+/* GUTENBERG IMAGES */
+
+.post-body figure {
+  margin: 30px 0;
+  max-width: 100%;
+}
+
+.post-body img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.post-body figcaption {
+  color: #888;
+  text-align: center;
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+  .blog-post {
+    padding: 20px 12px 50px;
+  }
+
+  .blog-content {
+    padding: 30px 22px 45px;
+  }
+
+  .post-title {
+    font-size: 29px;
+    margin-bottom: 25px;
+  }
+
+  .post-body {
+    font-size: 16px;
+    line-height: 1.75;
+  }
+
+  .thumbnails {
+    aspect-ratio: 4 / 3;
+  }
+
+  .post-body .wp-block-gallery {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .post-body .wp-block-gallery .wp-block-image {
+    width: 100% !important;
+  }
+}
 
 .language-switcher {
   display: flex;

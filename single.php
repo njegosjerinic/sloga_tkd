@@ -1,28 +1,32 @@
-<?php get_header(  ); 
-?>
-<?php 
-while(have_posts(  )){
-    the_post(  ); ?>
-    <div class="blog-post">
-        <div class="padding-for-post">
-            <div class=thumbnails>
-                <?php
-                if (has_post_thumbnail()) {
-                    the_post_thumbnail('custom-size'); // Use a smaller size for archives
-                }
-                ?>
+<?php get_header(); ?>
+
+<main class="blog-post">
+    <?php while (have_posts()):
+        the_post(); ?>
+
+        <article class="padding-for-post">
+
+            <?php if (has_post_thumbnail()): ?>
+                <div class="thumbnails">
+                    <?php the_post_thumbnail('large'); ?>
+                </div>
+            <?php endif; ?>
+
+            <div class="blog-content">
+
+                <h1 class="post-title">
+                    <?php the_title(); ?>
+                </h1>
+
+                <div class="post-body">
+                    <?php the_content(); ?>
+                </div>
+
             </div>
-        <div class="blog-content">
-            <h1><?php the_title(); ?></h1>
-            <p><?php the_content(); ?></p>
-        </div>
 
-        </div>
-    </div>
+        </article>
 
+    <?php endwhile; ?>
+</main>
 
-<?php }
-
-get_footer(  ); 
-
-?>
+<?php get_footer(); ?>
