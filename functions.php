@@ -1,5 +1,6 @@
-<?php 
-function theme_enqueue_assets() {
+<?php
+function theme_enqueue_assets()
+{
 
     wp_enqueue_style(
         'main-style',
@@ -24,16 +25,17 @@ function theme_enqueue_assets() {
     );
 }
 
-add_filter('jpeg_quality', function() {
+add_filter('jpeg_quality', function () {
     return 100; // Set to 100 for no compression
 });
 
 
-add_action( 'wp_enqueue_scripts', 'theme_enqueue_assets' );
+add_action('wp_enqueue_scripts', 'theme_enqueue_assets');
 
-add_theme_support( 'post-thumbnails' );
+add_theme_support('post-thumbnails');
 
-function custom_language_menu_setup() {
+function custom_language_menu_setup()
+{
     register_nav_menus(
         array(
             'language-menu' => __('Language Menu', 'sloga_tkd-master'),
@@ -42,16 +44,24 @@ function custom_language_menu_setup() {
 }
 add_action('after_setup_theme', 'custom_language_menu_setup');
 
+add_filter('excerpt_length', function () {
+    return 25;
+}, 999);
 
-function register_my_menus() {
+add_filter('excerpt_more', function () {
+    return '...';
+});
+
+function register_my_menus()
+{
     register_nav_menus(array(
-        'header-menu'=> __('Header Menu'),
-        'footer-menu'=>__('Footer Menu'),
-));
+        'header-menu' => __('Header Menu'),
+        'footer-menu' => __('Footer Menu'),
+    ));
 }
 add_action('init', 'register_my_menus');
 
-add_action('pre_get_posts', function($query) {
+add_action('pre_get_posts', function ($query) {
     if (!is_admin() && $query->is_main_query() && is_home()) {
         $query->set('orderby', 'date'); // Use a custom field like 'menu_order'
         $query->set('order', 'DESC'); // Change order to ascending

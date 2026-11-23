@@ -1,30 +1,27 @@
 <?php
 /*
-Template Name: Page Template
-*/
+ * Template Name: Page Template
+ */
 get_header();
-
 ?>
-<section id="page">
-    <div class="page-wrapper">
-        <div class="page-header">
-            <div class="page-thumbnail">
-                <?php if (has_post_thumbnail()) {
-
-                    the_post_thumbnail('full', ['alt' => 'Main about us picture']);
-
-                }
-                ?>
+<main class="sloga-page">
+    <?php while (have_posts()):
+        the_post();
+        $thumbnail = get_the_post_thumbnail(get_the_ID(), 'full', [
+            'sizes' => '(max-width: 550px) 100vw, (max-width: 62rem) calc(100vw - 2rem), 60rem',
+        ]);
+        ?>
+        <?php if ($thumbnail): ?>
+            <div class="sloga-page__thumbnail">
+                <?php echo $thumbnail; ?>
             </div>
-            <h1 class="page-title"><?php the_title() ?></h1>
+        <?php endif; ?>
+        <div class="sloga-page__body">
+            <h1 class="sloga-page__title"><?php the_title(); ?></h1>
+            <div class="sloga-page__content">
+                <?php the_content(); ?>
+            </div>
         </div>
-        <div class="page-content">
-            <p><?php the_content() ?></p>
-        </div>
-    </div>
-</section>
-<?php
-
-get_footer();
-
-?>
+    <?php endwhile; ?>
+</main>
+<?php get_footer(); ?>

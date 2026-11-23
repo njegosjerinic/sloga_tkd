@@ -17,8 +17,25 @@
                     </div>
                     <div class="news-text">
                         <h3 data-key="Trebinje2024-title"><?php the_title(); ?></h3>
-                        <p class="post-text" data-key="Trebinje2024-description"><?php the_excerpt(); ?></p>
-                        <p data-key="read-more">Pročitaj više</p>
+                        <div class="post-text">
+                            <?php the_excerpt(); ?>
+                        </div>
+
+                        <p class="read-more">
+                            <?php
+                            $uri_segments = explode('/', $_SERVER['REQUEST_URI']);
+
+                            if (in_array('de', $uri_segments)) {
+                                echo 'Mehr lesen';
+                            } elseif (in_array('en', $uri_segments)) {
+                                echo 'Read more';
+                            } else {
+                                echo 'Pročitaj više';
+                            }
+                            ?>
+
+                            <span class="read-more-arrow">→</span>
+                        </p>
                     </div>
                 </a>
             </div>
@@ -28,6 +45,14 @@
         ?>
     </div>
 
-    <div><?php echo paginate_links(); ?></div>
+    <div class="news-pagination">
+        <?php
+        the_posts_pagination([
+            'mid_size' => 1,
+            'prev_text' => '←',
+            'next_text' => '→',
+        ]);
+        ?>
+    </div>
 </section>
 <?php get_footer(); ?>

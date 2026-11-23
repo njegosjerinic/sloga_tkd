@@ -271,6 +271,32 @@ h2 {
   }
 }
 
+/* PAGINATION STYLE */
+
+.news-pagination .nav-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 40px 0;
+}
+
+.news-pagination .page-numbers {
+  padding: 10px 15px;
+  color: #222;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  transition: 0.2s;
+}
+
+.news-pagination .page-numbers:hover,
+.news-pagination .page-numbers.current {
+  background: #222;
+  color: white;
+  border-color: #222;
+}
+
 .language-switcher {
   display: flex;
   margin: 0;
@@ -605,46 +631,44 @@ h2 {
   align-items: center;
 }
 
-.page-wrapper {
-  width: 80%;
+.sloga-page {
+  width: calc(100% - 2rem);
+  max-width: 60rem;
+  margin: clamp(1.5rem, 3vw, 3rem) auto 4rem;
 }
 
-.page-header {
-  width: 100%;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 40vh;
-}
-
-.page-thumbnail {
-  position: absolute;
+.sloga-page__thumbnail {
+  height: clamp(15rem, 32vw, 22rem);
+  margin-block-end: clamp(1.75rem, 4vw, 2.5rem);
   overflow: hidden;
-  height: 40vh;
-  width: 100%;
+  border-radius: 0.375rem;
 }
 
-.page-thumbnail img {
+.sloga-page__thumbnail img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 37%;
-  filter: blur(5px);
+  object-position: 55% 26%;
 }
 
-.page-thumbnail::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.45);
-  pointer-events: none;
+.sloga-page__body {
+  max-width: 100ch;
+  margin: auto;
 }
 
-.page-title {
-  position: relative;
-  font-size: 50px;
-  color: white;
+.sloga-page__title {
+  margin: 0;
+  color: #171717;
+  font-size: clamp(2rem, 4.4vw, 3.25rem);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  overflow-wrap: anywhere;
+}
+
+.sloga-page__content {
+  margin-block-start: 1.25rem;
+  line-height: 1.6;
 }
 
 #Onama {
@@ -706,6 +730,7 @@ h2 {
   overflow: hidden;
   height: 600px;
   border: 1px solid lightgray;
+  border-radius: 5px;
 }
 
 .news-item:hover {
@@ -735,6 +760,36 @@ h2 {
 
 .news-text p {
   color: gray;
+}
+
+/* Read more */
+
+.news-text .read-more {
+  color: #c62828;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.read-more-arrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.news-item:hover .read-more-arrow {
+  transform: translateX(8px);
+}
+
+/* Excerpt */
+
+.post-text p {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.6;
 }
 
 #sponsor-section {
@@ -901,7 +956,7 @@ h2 {
 }
 
 /* phone screen*/
-@media screen and (max-width: 550px) {
+@media (max-width: 768px) {
   header {
     position: absolute;
     width: 100%;
@@ -1168,37 +1223,32 @@ h2 {
     align-items: center;
   }
 
-  .page-wrapper {
+  .sloga-page {
     width: 100%;
+    margin-block-start: 0;
   }
 
-  .page-header {
-    width: 100%;
-    position: relative;
-    height: 100%;
-    display: block;
+  .sloga-page__thumbnail {
+    height: 70vh;
+    height: 70svh;
+    border-radius: 0;
   }
 
-  .page-thumbnail {
-    position: relative;
-    overflow: hidden;
-    height: 100%;
+  .sloga-page__thumbnail img {
+    object-position: center;
   }
 
-  .page-thumbnail img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 37%;
-    filter: blur(0px);
-    transform: scale(1.02);
+  .sloga-page__body {
+    padding-inline: 1rem;
   }
 
-  .page-title {
-    position: relative;
-    font-size: 24px;
-    color: #635f5f;
-    right: 0;
+  .sloga-page__body:first-child {
+    padding-block-start: calc(10vh + 0.75rem);
+  }
+
+  body:has(> .sloga-page) .hamburger .bar {
+    background-color: white;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 75%);
   }
 
   #Onama {
@@ -1240,5 +1290,14 @@ h2 {
     width: 95%;
     grid-template-columns: repeat(1, 1fr);
     padding-top: 2.5%;
+  }
+
+  .wp-block-image {
+    width: 100% !important;
+  }
+
+  .wp-block-gallery.has-nested-images {
+    display: grid;
+    grid-template-columns: 1fr;
   }
 }
